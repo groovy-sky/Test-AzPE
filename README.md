@@ -9,8 +9,7 @@ Azure Private Endpoints only work when your workloads (VMs, apps, on-prem client
 This repository provides a PowerShell module (`Test-AzPE`) that helps to troubleshoot **Azure Private Endpoints** by validating  how it resolves against different **DNS resolves**.
 
 ## How it works
-Module compares responses from internal and public DNS. For correctly configured environment internal DNS returns private IP and public DNS returns public IP.
-
+Module checks if a PaaS FQDN resolves through its Private Endpoint instead of public DNS by comparing internal and public lookups(as public DNS resolver it uses 1.1.1.1). 
 
 ## Usage
 At first, install the script:
@@ -37,6 +36,4 @@ Test-AzPE -RecordName 'some-domain.azurewebsites.net' -InternalDnsServer '1.2.3.
 
 ## Summary
 `Test-AzPE` is a DNS-focused health check for Azure Private Endpoints. It helps you quickly determine whether name resolution is correctly returning a private endpoint IP from your internal DNS, and if not, whether you’re dealing with a missing/incorrect private DNS integration versus a non-existent record.
-## What for this module?
 
-Quickly checks if a PaaS FQDN resolves through its Private Endpoint instead of public DNS by comparing internal and public lookups. Confirms private IP success, flags public resolution, and spots private-link aliases that are not returning private IPs.
